@@ -6,10 +6,14 @@ ARG RAILS_MASTER_KEY
 ENV APP_ROOT /app
 
 ENV RAILS_ENV ${RAILS_ENV}
-#ENV RAILS_MASTER_KEY ${RAILS_MASTER_KEY}
+ENV RAILS_MASTER_KEY ${RAILS_MASTER_KEY}
 
 WORKDIR $APP_ROOT
 
+RUN apt-get update -qq && \
+    apt-get install -y build-essential \
+                       libpq-dev \
+                       nodejs
 ADD Gemfile $APP_ROOT
 ADD Gemfile.lock $APP_ROOT
 
